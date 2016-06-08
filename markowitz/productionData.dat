@@ -1,0 +1,37 @@
+set PRODUCTS := P1 P2 P3 P4;
+
+set MONTHS := Jan Feb Mar;
+
+set TOOLS := Szlifierka WiertkarkaPion WiertarkaPoz Frezarka Tokarka;
+
+param lambda := 1;
+
+param cases := 1000;
+
+param factoryTime := 384;
+
+param storeFare := 1;
+
+param productionTime:
+				P1		P2		P3		P4 :=
+Szlifierka 		0.4		0.6		0		0
+WiertkarkaPion 	0.2		0.1		0		0.6
+WiertarkaPoz 	0.1		0		0.7		0
+Frezarka 		0.06	0.04	0		0.05
+Tokarka			0		0.05	0.02	0
+;
+
+param toolsNumber :=
+Szlifierka 		4
+WiertkarkaPion 	2
+WiertarkaPoz 	3
+Frezarka 		1
+Tokarka 		1
+;
+
+param MarketLimitation:
+	P1	P2	P3	P4 :=
+Jan	400	0	200	300
+Feb	700	400	500	0
+Mar 0	800	600	400
+;

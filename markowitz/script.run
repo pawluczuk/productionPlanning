@@ -1,0 +1,38 @@
+reset;
+
+# solver CPLEX
+option solver "./cplexamp";
+option cplex_options 'round=1';
+option show_stats 1;
+option auxfiles r; 
+
+# model danych
+#model markowitz.mod;
+model markowitz-fixed.mod;
+
+# scenariusze
+#data scenarios.dat;
+data scenarios.dat;
+
+# pozostałe dane do modelu
+data productionData.dat;
+
+printf: "------------------------- SCRIPT RUN ------------------------------\n";
+
+# ograniczenie dolne zysku
+let m0 := 0;
+repeat
+{
+	let m0 := m0 + 100;
+	solve;
+	print m0 > markowitz/mi.txt;
+	print profit > markowitz/profit.txt;
+	print risk > markowitz/risk.txt;
+	printf: "\n----m0 : %d\n", m0;
+} until m0 >= 10000;
+
+display x;
+display minimizedRisk;
+display profit;
+
+
